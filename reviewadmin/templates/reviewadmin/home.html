@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        *
+        {
+          margin:0px;
+        }
+        header,footer
+        {
+          height:50px;
+          background-color:grey;
+        }
+
+        section
+        {
+        height:510px;
+        background-color:white;
+        }
+    </style>
+</head>
+<body>
+<section>
+    <h1>Welcome in Review Admin Project</h1>
+    <hr>
+    <h3>Login here</h3>
+    <br>
+    <form action="" method="post">
+        {% csrf_token %}
+        <input type="text" name="txtemail" placeholder="Enter email"/>
+        <br><br>
+        <input type="password" name="txtpass" placeholder="Enter password"/>
+        <br><br>
+
+        <input type="submit" name="btnsubmit" value="Login here"/>
+    </form>
+    {{msg}}
+</section>
+
+<footer>
+    <center>Created by Kangaroo Software PVT LTD</center>
+</footer>
+</body>
+</html>

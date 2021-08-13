@@ -1,0 +1,72 @@
+{% extends 'userapp/master.html' %}
+{% block content %}
+    <style type="text/css">
+        *
+        {
+              margin:0px;
+        }
+        header,footer
+        {
+              height:50px;
+              background-color: grey;
+        }
+
+        section
+        {
+        height:510px;
+        background-color: white;
+        }
+    </style>
+    <script>
+        function showother(item)
+        {
+            if(item=='other')
+            {
+            document.getElementById("txtother").style.visibility='visible';
+            }
+            else
+            {
+            document.getElementById("txtother").style.visibility='hidden';
+            }
+        }
+    </script>
+
+
+    <a href="/">Home</a> | <a href="/about">About Project</a> | <a href="/account">Account</a>
+
+
+    <center>
+        <h1>Edit Review System Page</h1>
+        <hr>
+
+           <h3>Edit Review Here</h3>
+        <form action="" method="POST">
+            {% csrf_token %}
+           <input type="hidden" value="{{data.id}}" name="txtid"/>
+            <select name="txtrating">
+                <option value="">Select Rating</option>
+                {% for k,v in star.items %}
+                <option value="{{k}}" {% if data.rating|slugify == k %} selected {% endif %}>{{v}}</option>
+
+                {% endfor %}
+
+            </select>
+            <br><br>
+            <select name="txtreviewto" onchange="showother(this.value)">
+                <option value="TCS" {% if data.reviewto == 'TCS' %} selected {% endif %}>TCS</option>
+                <option value="Infosys" {% if data.reviewto == 'Infosys' %} selected {% endif %}>Infosys</option>
+                <option value="WIPRO" {% if data.reviewto == 'WIPRO' %} selected {% endif %}>WIPRO</option>
+                <option value="other" {% if data.reviewto == 'other' %} selected {% endif %}>Other</option>
+            </select>
+            <span><input type="text" id="txtother" style="visibility:hidden;;"/></span>
+            <br><br>
+
+            <input type="text" name="txtdesc" value="{{data.reviewdesc}}" />
+            <br><br>
+
+
+            <input type="submit" name="btnsubmit" value="Submit"/>
+        </form>
+        {{msg}}
+    </center>
+{% endblock %}

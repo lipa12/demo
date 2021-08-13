@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <style type="text/css">
+        *
+        {
+            margin:0px;
+        }
+        header,footer
+        {
+            height:50px;
+            background-color: grey;
+        }
+        section
+        {
+             height:510px;
+             background-color: white;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <a href="/">Home</a> | <a href="/about">About Project</a> | <a href="/account">SIGN UP</a>
+</header>
+<section>
+    <center>
+    <h1>Welcome in Review System Account Page</h1>
+    <hr>
+    <form action="" method="post">
+     {% csrf_token %}
+    <input type="text" name="txtemail" placeholder="Enter email"/>
+    <br><br>
+    <input type="text" name="txtpass" placeholder="Enter password"/>
+    <br><br>
+    <input type="text" name="txtmobile" placeholder="Enter mobileno"/>
+    <br><br>
+    <input type="text" name="txtfname" placeholder="Enter fullname"/>
+    <br><br>
+    <input type="submit" name="btnsubmit" value="Register here"/>
+
+
+     </form>
+
+      {{msg}}
+
+    </center>
+
+</section>
+<footer>
+    <center>Created by Kangaroo Software PVT LTD</center>
+</footer>
+
+</body>
+</html>

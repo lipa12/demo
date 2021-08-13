@@ -1,0 +1,104 @@
+{% extends 'userapp/master.html' %}
+{% block content %}
+
+    <style type="text/css">
+        *
+        {
+            margin:0px;
+        }
+        header,footer
+        {
+            height:50px;
+            background-color: grey;
+        }
+        section
+        {
+             height:510px;
+             background-color: white;
+        }
+    </style>
+
+    <script>
+        function confirmdelete()
+        {
+            var s=confirm("Are you sure to delete the record");
+            if(s)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        function showother(item)
+        {
+            if(item=="other")
+            {
+            document.getElementById("txtother").style.visibility='visible';
+            }
+            else
+            {
+            document.getElementById("txtother").style.visibility='hidden';
+            }
+        }
+
+    </script>
+
+
+
+        <h3>Welcome in Review System Page</h3>
+
+        <div class="row">
+            <div class="col-sm-8">
+            {% if reviewdata %}
+            <table border="1">
+                <tr><th>ID</th><th>Rating</th><th>Description</th><th>Review To</th><th>Review Date</th></tr>
+
+                {% for data in reviewdata %}
+                <tr><td>{{data.id}}</td><td>{{data.rating}}</td><td>{{data.reviewdesc}}</td><td>{{data.reviewto}}</td><td>{{data.reviewdate}}</td><td><a href="editreview?q={{data.id}}"><img src="/static/img/edit.png" style="..."> </a>|| <a href="deletereview?q={{data.id}}" onclick="return confirmdelete()"> <img src="/static/img/delete.png" style="..."></a></td></tr>
+
+                {% endfor %}
+            </table>
+
+                {% else %}
+                <p>No review provided by you</p>
+                {% endif %}
+            </div>
+            <div class="col-sm-4">
+                <h3>Add Review Here</h3>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    <select name="txtrating">
+                        <option value="">Select Rating</option>
+                        {% for k,v in star.items %}
+                        <option value="{{k}}">{{v}}</option>
+
+                        {% endfor %}
+
+                    </select>
+                    <br><br>
+                    <select name="txtreviewto" onchange="showother(this.value)">
+                        {% for k in com %}
+                        <option value="{{k.companyname}}">{{k.companyname}}</option>
+
+                        {% endfor %}
+
+                    </select>
+                    <span><input type="text"  id="txtother" name="txtother" style="visibility:hidden;;"/></span>
+                    <br><br>
+                     <input type="text" name="txtdesc" placeholder="Enter review desc"/>
+                    <br><br>
+
+                    <input type="submit" name="btnsubmit" value="Submit"/>
+
+                </form>
+
+                {{msg}}
+        </div>
+    </div>
+
+{% endblock %}
+
+
